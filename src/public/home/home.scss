@@ -1,0 +1,122 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    user-select: none;
+
+    & h1,
+    h2 {
+        margin: 0.5rem 0;
+    }
+
+    & h2 {
+        align-self: center;
+    }
+
+    & .contenido {
+        margin: 1rem 0;
+        align-self: center;
+
+        & .informacion-compra {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid;
+            overflow: hidden;
+            padding: 1rem;
+            max-height: 20rem;
+
+            & span {
+                font-size: 1.5rem;
+            }
+
+            & .caja-productos {
+                overflow: auto;
+                margin: 1rem 0.5rem;
+                padding: 0 0.85rem;
+
+                &::-webkit-scrollbar {
+                    width: 4px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: gray;
+                    cursor: pointer;
+                }
+
+                /* Estilo adicional para el ancho del scrollbar */
+                &::-webkit-scrollbar-track {
+                    background-color: white;
+                }
+
+                & .producto {
+                    display: flex;
+                    max-width: 100%;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    border-top: 1px solid gray;
+                    border-bottom: 1px solid gray;
+                    padding: 0.5rem;
+
+                    & .categoria-producto {
+                        font-size: 0.8rem;
+                        color: gray;
+                    }
+
+                    & .producto-info {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+
+                        & .nombre-desc {
+                            max-width: 80%;
+                            min-width: 80%;
+                            margin: 0.5rem 0 0 0;
+
+                            & .producto-nombre {
+                                font-size: 1rem;
+                                font-weight: 600;
+                            }
+
+                            & .producto-descripcion {
+                                margin: 0.25rem 0 0 0;
+                                font-weight: 100;
+                                font-size: 0.8rem;
+                                font-family: system-ui;
+                            }
+                        }
+
+                        & .producto-precio {
+                            font-size: 0.8rem;
+                            color: gray;
+                            font-family: system-ui;
+                        }
+                    }
+                }
+            }
+
+            & .total {
+                display: flex;
+                align-items: center;
+                font-size: 1rem;
+
+                & p {
+                    margin: 0;
+                    margin-left: 0.5rem;
+                    color: gray;
+                }
+            }
+        }
+
+        & form {
+            margin: 1rem 0;
+
+            & button {
+                cursor: pointer;
+            }
+        }
+    }
+}

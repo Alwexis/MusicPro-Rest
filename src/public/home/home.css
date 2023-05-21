@@ -1,0 +1,104 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1rem 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+body h1,
+body h2 {
+  margin: 0.5rem 0;
+}
+body h2 {
+  align-self: center;
+}
+body .contenido {
+  margin: 1rem 0;
+  align-self: center;
+}
+body .contenido .informacion-compra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  overflow: hidden;
+  padding: 1rem;
+  max-height: 20rem;
+}
+body .contenido .informacion-compra span {
+  font-size: 1.5rem;
+}
+body .contenido .informacion-compra .caja-productos {
+  overflow: auto;
+  margin: 1rem 0.5rem;
+  padding: 0 0.85rem;
+  /* Estilo adicional para el ancho del scrollbar */
+}
+body .contenido .informacion-compra .caja-productos::-webkit-scrollbar {
+  width: 4px;
+}
+body .contenido .informacion-compra .caja-productos::-webkit-scrollbar-thumb {
+  background-color: gray;
+  cursor: pointer;
+}
+body .contenido .informacion-compra .caja-productos::-webkit-scrollbar-track {
+  background-color: white;
+}
+body .contenido .informacion-compra .caja-productos .producto {
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 0.5rem;
+}
+body .contenido .informacion-compra .caja-productos .producto .categoria-producto {
+  font-size: 0.8rem;
+  color: gray;
+}
+body .contenido .informacion-compra .caja-productos .producto .producto-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+body .contenido .informacion-compra .caja-productos .producto .producto-info .nombre-desc {
+  max-width: 80%;
+  min-width: 80%;
+  margin: 0.5rem 0 0 0;
+}
+body .contenido .informacion-compra .caja-productos .producto .producto-info .nombre-desc .producto-nombre {
+  font-size: 1rem;
+  font-weight: 600;
+}
+body .contenido .informacion-compra .caja-productos .producto .producto-info .nombre-desc .producto-descripcion {
+  margin: 0.25rem 0 0 0;
+  font-weight: 100;
+  font-size: 0.8rem;
+  font-family: system-ui;
+}
+body .contenido .informacion-compra .caja-productos .producto .producto-info .producto-precio {
+  font-size: 0.8rem;
+  color: gray;
+  font-family: system-ui;
+}
+body .contenido .informacion-compra .total {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+body .contenido .informacion-compra .total p {
+  margin: 0;
+  margin-left: 0.5rem;
+  color: gray;
+}
+body .contenido form {
+  margin: 1rem 0;
+}
+body .contenido form button {
+  cursor: pointer;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Procesamiento de Pago</title>
+        <link rel="stylesheet" href="/home/home.css">
+    </head>
+    <body>
+        <h1>MusicPro</h1>
+        <h2>Procesamiento de Pago</h2>
+        <section class="contenido">
+            <div class="informacion-compra">
+                <span>Información de la comprar</span>
+                <div class="caja-productos">
+                    <% for(let producto of productos) { %>
+                        <div class="producto">
+                            <span class="categoria-producto"><%= producto.categoria %></span>
+                            <div class="producto-info">
+                                <div class="nombre-desc">
+                                    <span class="producto-nombre"><%= producto.nombre %></span>
+                                    <p class="producto-descripcion"><%= producto.descripcion %></p>
+                                </div>
+                                <span class="producto-precio">$<%= producto.precio %></span>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+                <span class="total">Total: <p>$<%= total %></p></span>
+            </div>
+            <form action="<%= url %>" method="POST">
+                <input type="hidden" name="token_ws" value="<%= token %>" />
+                <button type="submit">
+                    Pagar
+                </button>
+            </form>
+        </section>
+    </body>
+</html>
