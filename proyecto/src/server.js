@@ -10,29 +10,40 @@ const cors = require('cors');
 const path = require('path');
 const dotenv = require('dotenv');
 const WebpayPlus = require('transbank-sdk').WebpayPlus;
+// const YAML = require('yamljs');
 const DB = require('./db.js');
 const Util = require('./util.js');
+const Swagger = require('./swagger.js');
 
 dotenv.config();
 const app = express();
 app.enable('trust proxy');
+
 // Utilizamos CORS para evitar problemas de Origenes Cruzados.
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
+// Swagger
+const { serve, setup } = Swagger.setup();
+app.use("/docs", serve, setup);
 const port = process.env.PORT || 3000;
 
 // Iniciamos la Base de Datos
 var _DB = new DB();
+
+app.get(/\/$|api-docs/, (req, res) => {
+    res.redirect('/docs');
+});
 
 app.get('/api/producto', async (req, res) => {
     let productos = Object.keys(req.query).length > 0 ? await _DB.getProducto(req.query) : await _DB.getProductos();
     res.status(200).json(productos)
 });
 
+// crear producto
 app.post('/api/producto', async (req, res) => {
     if (req.body) {
         const _REQUIRED_FIELDS = ['categoria', 'descripcion', 'nombre', 'precio', 'stock'];
@@ -96,6 +107,8 @@ app.put('/api/producto', async (req, res) => {
 *     ]
 * }
 */
+
+//crear pedido
 app.post('/api/pedido', async (req, res) => {
     if (req.body) {
         const _REQUIRED_FIELDS = ['cliente', 'productos'];
@@ -124,6 +137,7 @@ app.post('/api/pedido', async (req, res) => {
     }
 });
 
+//obtener las transacciones
 app.get('/transaccion', async (req, res) => {
     try {
         if (!req.query.buyOrder || !req.query.sessionID) throw new Error('No se han especificado los parámetros necesarios para la transacción.');
@@ -157,6 +171,7 @@ app.get('/transaccion', async (req, res) => {
     }
 })
 
+// Confirmación del pago
 app.get('/transaccion/committed', async (req, res) => {
     const info = await (new WebpayPlus.Transaction()).status(req.query.token_ws);
     const { buy_order, session_id, status, transaction_date, card_detail, payment_type_code } = info;

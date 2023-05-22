@@ -10,7 +10,7 @@ class Util {
         //! stock > 10
         let parsedQuery = [];
         Object.keys(rawQuery).forEach(key => {
-            if (rawQuery[key].startsWith('>') || rawQuery[key].startsWith('<') || rawQuery[key].startsWith('=>') || rawQuery[key].startsWith('=<')) {
+            if (rawQuery[key].startsWith('>') || rawQuery[key].startsWith('<')) {
                 parsedQuery.push(`${key} ${rawQuery[key]}`);
             } else if (key == 'id' && !rawQuery[key].startsWith('producto:')) {
                 parsedQuery.push(`${key} = producto:${rawQuery[key]}`);

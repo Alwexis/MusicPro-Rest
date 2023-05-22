@@ -112,6 +112,10 @@ class DB {
      * @returns { Promise<object> } Retorna un objeto con los datos de la transacción.
      */
     async setupTransaction(data) {
+        for (producto in data.productosObject) {
+            if (producto.stock < 1) everyProductHasStock = false;
+            throw new Error(`No hay stock en el producto ${producto.nombre} con la ID ${producto.id}`);
+        }
         let transactionData = await this._db.create('preTransaccion', data);
         return transactionData[0];
     }
@@ -133,6 +137,11 @@ class DB {
     async createTransaction(data) {
         await this._db.delete(data['id']);
         delete data['id'];
+        data.productos.forEach(async (id) => {
+            let producto = (await this.getProducto({ id: id }))[0];
+            producto.stock -= 1;
+            let productoActualizado = await this.updateProducto(id, producto);
+        })
         let transaction = await this._db.create('transaccion', data);
         return transaction[0];
     }
